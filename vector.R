@@ -3,6 +3,7 @@ x = c(1,2,3)
 x1=1:1000000
 length(x1)
 x1
+x
 ##Creating a sequence with a gap of 2
 x2 =seq(10,100,2)
 x2
@@ -38,6 +39,27 @@ plot(density(marks))
 
 hist(marks2)
 
+
+g = trunc(marks2)
+g
+length(g)
+min(g)
+max(g)
+range(g)
+h=c(26:91)
+h
+hist(g)
+length(h)
+hh <- hist(g, breaks = 10, density = 10,
+          col = "lightgray", xlab = "Accuracy", main = "Overall") 
+xfit <- seq(min(g), max(g), length = 40) 
+xfit
+yfit <- dnorm(xfit, mean = mean(g), sd = sd(g)) 
+yfit
+yfit <- yfit * diff(hh$mids[1:2]) * length(g) 
+
+lines(xfit, yfit, col = "black", lwd = 2)
+
 #character vector-----
 names= c("Ram","Shyam","Robin")
 names
@@ -48,13 +70,14 @@ summary(names)
 gender=c("M","F","M")
 genderF= factor(gender)
 summary(genderF)
+genderF
 
 (grades = c('A','B','C','D','A','D'))
-gradesF= factor(grades,ordered=TRUE)
+gradesF= factor(grades,ordered=T)
 gradesF
 
 ##Changing the order of the Grades. Now Grade D is HIGHEST
-gradesF1 =factor(grades,ordered=T,levels=c('D','B','A','C'))
+gradesF1 =factor(grades,ordered=T,levels=c('D','C','B','A'))
 gradesF1
 summary(gradesF1)
 table(gradesF1)
@@ -63,9 +86,14 @@ pie(table(gradesF1))
 
 ##Logical
 married=c(TRUE,FALSE,T,F,T,F,T)
+Employee=c("Ramprakas Singh","Vishal Yadav","Swati Kumari","Nayan Gupta","Jyoti Kumar","Manas Joshi","Paras Dholakia")
 married
+name
 sum(married)
 table(married)
+?table
+Marital_status=data.frame(Employee,married)
+Marital_status
 class(married)
 summary(married)
 pie(table(married))
