@@ -52,7 +52,9 @@ hist(g)
 length(h)
 hh <- hist(g, breaks = 10, density = 10,
           col = "lightgray", xlab = "Accuracy", main = "Overall") 
-xfit <- seq(min(g), max(g), length = 40) 
+hh=hist(g)
+hh
+xfit <- seq(min(g), max(g), length = 10000) 
 xfit
 yfit <- dnorm(xfit, mean = mean(g), sd = sd(g)) 
 yfit

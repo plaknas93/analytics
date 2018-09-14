@@ -1,6 +1,6 @@
 #matrices
 ?matrix
-x=c(1,12)
+x=c(1:12)
 ##Creating Matrix
 m1=matrix(data=x,nrow=4,ncol=3,byrow=F,dimnames=NULL)
 m1
@@ -67,10 +67,11 @@ nrow(df) ##no of row
 ncol(df) ##no of col
 names(df) ##Names of col
 summary(df)
-df[1,1:4]
+df[2,1:4]
 df[1:2,1:4]
-df[c(1,3),c(1,4,5,6)] ##Specific rows and columns
-
+dim(df)
+df[c(1,3),c(1,3,5)] ##Specific rows and columns
+head(df)
 df[df$gender=='M',] ##Display only Gender == M
 df[df$gender=='M', 3:5] ## display males only 3rd to 5th col
 df[df$gender=='M' & df$marks1>70,] ## display males with marks1 score abv 70
