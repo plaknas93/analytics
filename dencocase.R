@@ -44,6 +44,7 @@ head(t2)
 library(dplyr)
 ##For customers
 ## %>% is subset of a set
+head(sales)
 sales %>% dplyr::count(custname, sort=TRUE) ## %>% is called pipe funct
 sales %>% dplyr::group_by(custname) %>% dplyr::summarise(n = n()) %>% dplyr::arrange(desc(n))
 #For counting regions: Freq of Sales by region
@@ -55,7 +56,9 @@ sales %>% dplyr::group_by(partnum) %>% dplyr::summarise(n = n()) %>% dplyr::arra
 
 # which parts have highest Profit : partno - sum(profit)
 sales %>% group_by (partnum) %>% summarise(TotalMargin= sum(margin)) %>% arrange(desc(TotalMargin)) %>% head()
-
+highprof=sales %>% group_by(partnum) %>% summarise(TotalMargin=sum(margin))
+highprof[order(-highprof$TotalMargin),]
+length(unique(sales$partnum))
 
 #Reqmt-3 : which region generated how much revenue
 sales
@@ -66,9 +69,11 @@ regionRevenue
 barplot(regionRevenue$TotalRevenue)
 pie(regionRevenue$TotalRevenue)
 
-
 #Reqmt-4 : which customer (top 5) gave most revenue
-sales %>% group_by(custname) %>% summarise(TotalRevenue=sum(revenue)) %>% arrange(desc(TotalRevenue))  %>% head(n=5)
+head(sales)
+Total_Cust_Rev=sales %>% group_by(custname) %>% summarise(TotalRevenue=sum(revenue)) %>% arrange(desc(TotalRevenue))  %>% head(n=5)
+head(Total_Cust_Rev)
+barplot(Total_Cust_Rev$TotalRevenue)
 
 #Reqmt-5 : top 2 customers names by revenue from each region
 sales %>% group_by(region,custname) %>% summarise(TotalRevenue=sum(revenue)) %>% arrange(desc(TotalRevenue))  %>% print(n=Inf)
@@ -89,3 +94,12 @@ sales %>% mutate(newmargin=margin * .90) %>% select(partnum, margin, newmargin)
 
 
 sales %>% filter(region=='9x-Export') %>% group_by(custname) %>% summarise(max(revenue))
+
+
+#Products that are Regional Leaders in each region
+head(sales)
+Regional_leader = sales %>% group_by(region,partnum) %>% summarise(TotalRevenue=sum(revenue)) %>% arrange(desc(TotalRevenue)) %>% print(n=Inf)
+
+sales %>% group_by(region,partnum) %>% summarise(TotalRevenue=sum(revenue)) %>% arrange(desc(TotalRevenue)) %>% top_n(n=2)
+
+sales %>% group_by(region,partnum) %>% summarise(TotalRevenue=sum(revenue)) %>% arrange(desc(TotalRevenue))  %>% top_n(n=2)

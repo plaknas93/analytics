@@ -82,7 +82,7 @@ nrow(df[df$gender=='M',])
 ##sort
 sort(df$marks1)
 order(df$marks1) ##position of the ascending sort for each cell
-df[order(df$marks1), ]
+df[order(df$marks1),] 
 
 sort(df$marks1)
 rev(sort(df$marks1))
