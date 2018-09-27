@@ -21,7 +21,7 @@ head(sales3)
 #names(sales1)
 
 # whichever you read the data, store it in sales object
-sales = sales1  # keeping a backup
+sales = sales2  # keeping a backup
 str(sales)
 class(sales)
 str(sales)

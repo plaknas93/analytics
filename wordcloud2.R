@@ -17,7 +17,7 @@ text4 = readLines(file.choose())
 
 # Read the text file from internet
 filePath <- "http://www.sthda.com/sthda/RDoc/example-files/martin-luther-king-i-have-a-dream-speech.txt"
-text <- readLines(filePath)
+text <- text2
 
 # Load the data as a corpus
 docs <- Corpus(VectorSource(text))
