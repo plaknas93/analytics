@@ -3,7 +3,7 @@
 ## (1) Total average and marginal revenue
 
 #UNDER PERFECT COMPETITION
-qty=c(1:10)
+qty=c(0:10)
 price=100
 tr=expression(qty*price)
 tot_rev=eval(tr,list(qty=qty))
@@ -156,3 +156,75 @@ lines(Q,TC,col='red',lty='dotted')
 points(Q[7],TR[7],pch=3,col='Blue')
 points(x[y=60],y[y=60],pch='dotted',col='blue')
 abline(h=60,v=0)
+
+
+##Profit Maximization
+info
+info3
+##Exhibit 23: Profit Maximization using Total Revenue & Total Cost under PERFECT COMPETITION
+info5=data.frame(Q=info$qty,P=info$price,TR=info$tot_rev,TC=info3$TC,Prof=(info$tot_rev-info3$TC),MR=info3$MR,MC=info3$MC)
+info5
+plot(info5$Q,info5$TR,type='n',xaxs='i',yaxs='i',xlab = 'Qty',ylab='TR,TC',col='green',main = 'Profit Maximization using Total Revenue & Total Cost under PERFECT COMPETITION')
+lines(info5$Q,info5$TR,col='green')
+lines(info5$Q,info5$TC,col='red')
+
+##Exhibit 24: Profit Maximization using MC & MR under PERFECT COMPETITION
+
+plot(info5$Q,info5$MC,type='n',xaxs='i',yaxs='i',xlab = 'Qty',ylab='MR,MC',col='green',main = 'Profit Maximization using MR & MC under PERFECT COMPETITION')
+lines(info5$Q,info5$MR,col='green')
+lines(info5$Q,info5$MC,col='red')
+legend(6.35,100,legend = c('Marginal Revenue','Marginal Cost'),col = c('green','red'),lty = 1:1,cex=0.8,box.lty=0)
+
+
+####Exhibit 25: Profit Maximization under IMPERFECT COMPETITION
+
+Q=c(0:10)
+P=c(seq(1000,950,-5))
+TR=P*Q
+TR
+cbind(TR)
+TC=c(550,1000,1500,2100,2800,3600,4600,5800,7200,8800,10800)
+Profit=TR-TC
+
+MR=Inf
+for(i in 1:10)
+{
+    MR[i+1]=TR[i+1]-TR[i]
+}
+MR
+
+MC=Inf
+for(i in 1:10)
+{
+    MC[i+1]=TC[i+1]-TC[i]
+}
+MC
+ATC=TC/Q
+AVC=(TC-550)/Q
+
+info6=data.frame(Q,P,TR,TC,Profit,MR,MC,ATC,AVC)
+info6
+
+## TR minus TC METHOD
+plot(info6$Q,info6$TC,type='n',xaxs='i',yaxs='i',xlab = 'Qty',ylab='TR,TC',col='green',main = 'Profit Maximization using TR & TC under IMPERFECT COMPETITION')
+lines(info6$Q,info6$TR,col='green')
+lines(info6$Q,info6$TC,col='red')
+legend(6.35,4000,legend = c('Total Revenue','Total Cost'),col = c('green','red'),lty = 1:1,cex=0.8,box.lty=0)
+
+## MR = MC METHOD
+plot(info6$Q,info6$MC,type='n',xaxs='i',yaxs='i',xlab = 'Qty',ylab='MR,MC',col='green',main = 'Profit Maximization using MR & MC under IMPERFECT COMPETITION')
+lines(info6$Q,info6$MR,col='green')
+lines(info6$Q,info6$MC,col='red')
+legend(0.25,1900,legend = c('Marginal Revenue','Marginal Cost'),col = c('green','red'),lty = 1:1,cex=0.8,box.lty=0)
+
+info6
+y=c(seq(100,1100,100))
+y
+length(y)
+plot(info6$Q,y,type='n',xaxs='i',yaxs='i',xlab = 'Qty',ylab='MR,MC',col='green',main = 'SR Supply Curve, Breakeven pt & Shutdown pt under IMPERFECT COMPETITION')
+lines(info6$Q,info6$AVC,col='blue',lty='dotted')
+lines(info6$Q,info6$ATC,col='dark red',lty='longdash')
+lines(info6$Q,info6$MC,col='red')
+legend(6.5,700,legend = c('Avg Total Cost','Marginal Cost','Avg Var Cost'),col = c('dark red','red','blue'),lty = c(2,1,3),cex=0.8,box.lty=0)
+rect(3.8,670,4.2,730,,lwd = 1,density = 20,lty = 'solid')
+
