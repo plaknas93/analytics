@@ -25,3 +25,91 @@ boxplot(iris$Sepal.Length~iris$Species,xlab='Species',ylab='Sepal Length', main 
 ## UNDERSTANGING ggplot2
 ## gg stands for "Grammar of Graphics" 
 
+## Grammar of Graphics
+### It consists of (1) DATA-> Basically the data set (2) AESTTHETICS -> Scale over which the data has to be plotted (3) GEOMETRY -> Visual element of the data e.g. boxplot,scatter plot etc   (4) Facet -> Grouping of data
+
+# Bivariate Analysis with the help of a SCATTER PLOT using ggplot
+
+## Step 1: Selecting Data
+ggplot(data=iris)
+## Step 2: Mapping data to aesthetics
+ggplot(data=iris,aes(y=iris$Sepal.Length,x=iris$Petal.Length))
+## Step 3: Selecting the Geometry ( In this case Scatter plot hence geom_point())
+ggplot(data=iris,aes(y=iris$Sepal.Length,x=iris$Petal.Length)) + geom_point()
+ 
+##Playing with AESTHETICS
+ggplot(data=iris,aes(y=iris$Sepal.Length,x=iris$Petal.Length, col=iris$Species)) + geom_point()
+
+ggplot(data=iris,aes(y=iris$Sepal.Length,x=iris$Petal.Length, shape=iris$Species)) + geom_point()
+
+ggplot(data=iris,aes(y=iris$Sepal.Length,x=iris$Petal.Length, col=iris$Species,shape=iris$Species),xlab='Petal Length',ylab='Sepal Length',main='Sepal length vs Petal length') + geom_point()
+
+mydata=read.csv(file.choose())
+mydata
+head(mydata) 
+
+###Splitting Date into year month and day
+year=substr(mydata$Mon,start=5,stop=6)
+year
+month=substr(mydata$Mon,start=1,stop=3)
+ret=Inf
+for(i in 1:464)
+{
+    ret[i+1]=((mydata$Close[i+1]-mydata$Close[i])/mydata$Close[i])*100
+}
+ret=ceiling(ret)
+ret
+mydata=data.frame(year,month,ret)
+head(mydata)
+
+View(mydata)
+
+##Playing with Geometry
+#Histogram
+gplot(data=mydata,aes(x=ret)) + geom_histogram()
+ggplot(data=mydata,aes(x=ret)) + geom_histogram(bins=50,fill='palegreen4')
+ggplot(data=mydata,aes(x=ret)) + geom_histogram(bins=50,fill='palegreen4',col='green')
+
+#Mapping fill to aes
+ggplot(data=mydata,aes(x=ret,fill=month)) + geom_histogram()
+##Observation: No month stands out in terms of skewed returns 
+ggplot(data=mydata,aes(x=ret,fill=year)) + geom_histogram()
+
+#Observations for Iris set
+head(iris)
+nrow(iris)
+ggplot(data=iris,aes(x=Sepal.Length)) + geom_histogram()
+ggplot(data=iris,aes(x=Sepal.Length,fill=Species)) + geom_histogram()
+#Observation: Setosa on the lower side and virginca on the higher side of sepal length
+ggplot(data=iris,aes(x=Sepal.Length,fill=Species)) + geom_histogram(position='fill')
+#observation: probability of species being Viginca increases with increase in Sepal length 
+
+#Barplot (used to see distribution of categorical variables )
+ggplot(data=iris,aes(x=Species)) + geom_bar()
+mtcars
+head(mtcars)
+nrow(mtcars)
+ggplot(data=mtcars,aes(x=gear)) + geom_bar()
+ggplot(data=mtcars,aes(x=gear,fill=vs)) + geom_bar()
+
+#Frequency Polygon
+ggplot(data=mydata,aes(x=ret)) + geom_freqpoly()
+
+##Practice with House.csv
+house=read.csv(file.choose())
+head(house)
+nrow(house)
+names(house)
+
+#Plotting scatterplot TotalRooms vs SalesPrice
+ggplot(data=house,aes(x=house$TotRmsAbvGrd,y=house$SalePrice))+geom_point()
+
+#Plotting histogram for SalesPrice
+ggplot(data=house,aes(x=SalePrice))+geom_histogram()
+
+##Modifying the histogram
+ggplot(data=house,aes(x=SalePrice,fill=house$GarageType))+geom_histogram()
+ggplot(data=house,aes(x=SalePrice))+geom_freqpoly()
+
+
+

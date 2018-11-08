@@ -235,7 +235,7 @@ m=c(seq(0,7,1))
 tp=c(0,1000,2500,4500,6400,7400,7500,7000)
 ap=tp/m
 cbind(m,tp)
-mp=Inf
+mp=NaN
 
 for(i in 1:7)
 {
@@ -255,11 +255,11 @@ lines(info7$m,info7$ap,col='blue',lty='dotted')
 lines(info7$m,info7$mp,col='red')
 legend(x = 6,y=2500,legend=c("Average Productivity","Marginal Productivity"),col=c('blue','red'),lty = c(2,1),cex=0.8)
 
-plot(info7$ap + info7$mp ~ info7$m)
-
+#Using ggplot
 library(ggplot2)
-?ggplot
 
-gg=ggplot(data=info7,aes(m,mp, 1))
-gg    
-ggplot(info7, aes(m, ap+mp)) + geom_point() + theme_minimal()
+ggplot(data=info7,aes(x=m))+geom_line(aes(y=ap,colour='Average Productivity'))+geom_line(aes(y=mp,colour='Marginal Productivity'))+labs(x='Machines',y='Avg Prod, Marg Prod',title='Productivity : Marginal & Avergae')
+
+
+ggplot(data=info7,aes(x=m))+geom_line(aes(y=ap,colour='Average Productivity'))+geom_line(aes(y=mp,colour='Marginal Productivity'))+labs(x='Machines',y='Productivity',title='Productivity : Total, Average & Margina')+geom_line(aes(y=tp,colour='Total Productivity'))
+
