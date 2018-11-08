@@ -131,7 +131,7 @@ legend(6, 60, legend=c('Avg Fixed Cost',"Avg Fixed Cost", "Avg Var Cost",'Margin
 
 library(ggplot2)
 ?ggplot
-ggplot(data = info3,) 
+ggplot(data = info3) 
 ##Code for naming points on a Graph    
 #attach(mtcars)
 #plot(wt, mpg, main="Milage vs. Car Weight", 
@@ -226,5 +226,40 @@ lines(info6$Q,info6$AVC,col='blue',lty='dotted')
 lines(info6$Q,info6$ATC,col='dark red',lty='longdash')
 lines(info6$Q,info6$MC,col='red')
 legend(6.5,700,legend = c('Avg Total Cost','Marginal Cost','Avg Var Cost'),col = c('dark red','red','blue'),lty = c(2,1,3),cex=0.8,box.lty=0)
-rect(3.8,670,4.2,730,,lwd = 1,density = 20,lty = 'solid')
 
+##Productivity
+
+#Calculation of Total, Average and Marginal Productivity
+
+m=c(seq(0,7,1))
+tp=c(0,1000,2500,4500,6400,7400,7500,7000)
+ap=tp/m
+cbind(m,tp)
+mp=Inf
+
+for(i in 1:7)
+{
+    mp[i+1]=tp[i+1]-tp[i]
+}
+
+mp
+
+info7=data.frame(m,tp,ap,mp)
+info7
+length(m)
+y=seq(-500,2400,400)
+length(y)
+y
+plot(info7$m,info7$mp,type='n',xlab = 'Input: Machines', ylab = 'Productivity: AP & MP',xlim = c(0,10),ylim=c(-500,2500))
+lines(info7$m,info7$ap,col='blue',lty='dotted')
+lines(info7$m,info7$mp,col='red')
+legend(x = 6,y=2500,legend=c("Average Productivity","Marginal Productivity"),col=c('blue','red'),lty = c(2,1),cex=0.8)
+
+plot(info7$ap + info7$mp ~ info7$m)
+
+library(ggplot2)
+?ggplot
+
+gg=ggplot(data=info7,aes(m,mp, 1))
+gg    
+ggplot(info7, aes(m, ap+mp)) + geom_point() + theme_minimal()

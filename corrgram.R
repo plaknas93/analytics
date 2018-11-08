@@ -16,3 +16,4 @@ corrgram(xy, order=TRUE, lower.panel=panel.ellipse,
 
 #r2 0.4 adj is 0.25
 1-(0.58*1.285)
+
