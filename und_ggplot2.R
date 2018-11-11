@@ -111,5 +111,21 @@ ggplot(data=house,aes(x=SalePrice))+geom_histogram()
 ggplot(data=house,aes(x=SalePrice,fill=house$GarageType))+geom_histogram()
 ggplot(data=house,aes(x=SalePrice))+geom_freqpoly()
 
+##Practice Simple Supply and Demand Curves
+Q=c(seq(0,100,10))
+Ps=15+Q
+S=data.frame(Q,Ps)
+S
+Pd=90-0.5*Q
+D=data.frame(Q,Pd)
+D
+SD=data.frame(Q,Ps,Pd)
+SD
+#Supply Curve
+ggplot(data=S,aes(x=Q,y=Ps))+geom_line()
+#Demand Curve
+ggplot(data=S,aes(x=Q,y=Pd))+geom_line()
+#Supply Demand and Equilibrium
+ggplot(data=S,aes(x=Q))+geom_line(aes(y=Ps,colour='Supply Curve'))+geom_line(aes(y=Pd,colour='Demand Curve'))+geom_point(x=50,y=65,colour='dark green',size=4)+labs(x='Quantity',y='Price',title='Supply Demand Equilibrium')
 
-
+                                                                             

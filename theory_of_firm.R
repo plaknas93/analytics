@@ -263,3 +263,5 @@ ggplot(data=info7,aes(x=m))+geom_line(aes(y=ap,colour='Average Productivity'))+g
 
 ggplot(data=info7,aes(x=m))+geom_line(aes(y=ap,colour='Average Productivity'))+geom_line(aes(y=mp,colour='Marginal Productivity'))+labs(x='Machines',y='Productivity',title='Productivity : Total, Average & Margina')+geom_line(aes(y=tp,colour='Total Productivity'))
 
+
+
