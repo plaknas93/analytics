@@ -263,5 +263,13 @@ ggplot(data=info7,aes(x=m))+geom_line(aes(y=ap,colour='Average Productivity'))+g
 
 ggplot(data=info7,aes(x=m))+geom_line(aes(y=ap,colour='Average Productivity'))+geom_line(aes(y=mp,colour='Marginal Productivity'))+labs(x='Machines',y='Productivity',title='Productivity : Total, Average & Margina')+geom_line(aes(y=tp,colour='Total Productivity'))
 
+curve(5715.3/(x-5867),from = 10000,to=50000,xlab='Output',ylab = 'Price')
 
+curve(12292.7-(150*x),from = 1,to=20,xlab='Interest Rate',ylab = 'Output')
+curve(82-0.0067*x,from = 9000,to=12000,xlab='Output',ylab = 'Interest Rate')
 
+library("ggplot2")
+eq1 = function(x){82-.0067*x}
+eq2 = function(x){168-0.014*x}
+ggplot(data.frame(x=c(9000,12000)), aes(x=x)) + stat_function(fun=eq1, geom="line",aes(colour='Y=12292-150*r')) + stat_function(fun=eq2, geom="line",aes(colour='Y=12292-73*r')) + xlab("Output") + ylab("Interest rate")
+``
